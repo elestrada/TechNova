@@ -1,5 +1,5 @@
 # TechNova 🚀
-
+Proyecto de comercio electrónico
 ## Descripción
 TechNova es un sistema de comercio electrónico orientado a la venta de productos tecnológicos.
 
