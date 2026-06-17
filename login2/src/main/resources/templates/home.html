@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechNova - Tienda</title>
+    <style>
+        /* ===== RESET Y BASE ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+            background-color: #F5F5F5;
+            color: #333333;
+        }
+
+        /* ===== BARRA DE NAVEGACIÓN ===== */
+        .navbar {
+            background-color: #FFFFFF;
+            padding: 16px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #EEEEEE;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+
+        .navbar .logo {
+            font-size: 28px;
+            font-weight: 700;
+            color: #FF8A00;
+            letter-spacing: -0.5px;
+            text-decoration: none;
+        }
+
+        .navbar .nav-links {
+            display: flex;
+            gap: 32px;
+            align-items: center;
+        }
+
+        .navbar .nav-links a {
+            text-decoration: none;
+            color: #777777;
+            font-weight: 500;
+            font-size: 15px;
+            transition: color 0.2s;
+        }
+
+        .navbar .nav-links a:hover {
+            color: #FF8A00;
+        }
+
+        .navbar .nav-links .user-info {
+            color: #333333;
+            font-weight: 600;
+            font-size: 15px;
+        }
+
+        .navbar .nav-links .logout-btn {
+            background-color: #FF8A00;
+            color: white;
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: background-color 0.2s;
+        }
+
+        .navbar .nav-links .logout-btn:hover {
+            background-color: #E07D00;
+        }
+
+        /* ===== BANNER PRINCIPAL ===== */
+        .hero {
+            background: linear-gradient(135deg, #FF8A00 0%, #E07D00 100%);
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+            margin: 20px 40px;
+            border-radius: 24px;
+        }
+
+        .hero h1 {
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            opacity: 0.95;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* ===== CATEGORÍAS DESTACADAS ===== */
+        .section-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: #333333;
+            padding: 0 40px;
+            margin: 40px 0 20px 0;
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 20px;
+            padding: 0 40px;
+            margin-bottom: 40px;
+        }
+
+        .category-card {
+            background-color: #FFFFFF;
+            border-radius: 16px;
+            padding: 20px;
+            text-align: center;
+            border: 1px solid #EEEEEE;
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: default;
+        }
+
+        .category-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(255,138,0,0.10);
+        }
+
+        .category-card .icon {
+            font-size: 36px;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .category-card .name {
+            font-weight: 600;
+            font-size: 16px;
+            color: #333333;
+        }
+
+        .category-card .count {
+            font-size: 13px;
+            color: #777777;
+        }
+
+        /* ===== PRODUCTOS DESTACADOS ===== */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 24px;
+            padding: 0 40px;
+            margin-bottom: 60px;
+        }
+
+        .product-card {
+            background-color: #FFFFFF;
+            border-radius: 16px;
+            padding: 20px;
+            text-align: center;
+            border: 1px solid #EEEEEE;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+        }
+
+        .product-card .product-image {
+            font-size: 56px;
+            display: block;
+            margin: 8px 0 12px 0;
+        }
+
+        .product-card .product-name {
+            font-weight: 600;
+            font-size: 16px;
+            color: #333333;
+            margin-bottom: 4px;
+        }
+
+        .product-card .product-price {
+            font-size: 18px;
+            font-weight: 700;
+            color: #FF8A00;
+            margin-bottom: 12px;
+        }
+
+        .product-card .add-btn {
+            background-color: #FF8A00;
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .product-card .add-btn:hover {
+            background-color: #E07D00;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                gap: 12px;
+                padding: 16px 20px;
+            }
+            .navbar .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 16px;
+            }
+            .hero {
+                margin: 16px 16px;
+                padding: 40px 20px;
+            }
+            .hero h1 {
+                font-size: 28px;
+            }
+            .categories-grid,
+            .products-grid {
+                padding: 0 16px;
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .section-title {
+                padding: 0 16px;
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== BARRA DE NAVEGACIÓN ===== -->
+    <nav class="navbar">
+        <a href="/home" class="logo">TechNova</a>
+        <div class="nav-links">
+            <a href="#">Inicio</a>
+            <a href="#">Categorías</a>
+            <a href="#">Ofertas</a>
+            <span class="user-info">👋 Hola, <span th:text="${nombreUsuario}"></span></span>
+            <a href="/logout" class="logout-btn">Cerrar Sesión</a>
+        </div>
+    </nav>
+
+    <!-- ===== BANNER ===== -->
+    <section class="hero">
+        <h1>Bienvenido a TechNova</h1>
+        <p>Encuentra la mejor tecnología al mejor precio. Smartphones, laptops, accesorios y más.</p>
+    </section>
+
+    <!-- ===== CATEGORÍAS ===== -->
+    <h2 class="section-title">📂 Categorías destacadas</h2>
+    <div class="categories-grid">
+        <div class="category-card">
+            <span class="icon">📱</span>
+            <div class="name">Smartphones</div>
+            <div class="count">48 productos</div>
+        </div>
+        <div class="category-card">
+            <span class="icon">💻</span>
+            <div class="name">Laptops</div>
+            <div class="count">32 productos</div>
+        </div>
+        <div class="category-card">
+            <span class="icon">🎧</span>
+            <div class="name">Audio</div>
+            <div class="count">27 productos</div>
+        </div>
+        <div class="category-card">
+            <span class="icon">⌚</span>
+            <div class="name">Wearables</div>
+            <div class="count">15 productos</div>
+        </div>
+    </div>
+
+    <!-- ===== PRODUCTOS DESTACADOS ===== -->
+    <h2 class="section-title">⭐ Productos destacados</h2>
+    <div class="products-grid">
+
+        <!-- Producto 1 -->
+        <div class="product-card">
+            <span class="product-image">📱</span>
+            <div class="product-name">Smartphone Pro X</div>
+            <div class="product-price">$899.000</div>
+            <button class="add-btn">Agregar al carrito</button>
+        </div>
+
+        <!-- Producto 2 -->
+        <div class="product-card">
+            <span class="product-image">💻</span>
+            <div class="product-name">Laptop Ultra Slim</div>
+            <div class="product-price">$1.299.000</div>
+            <button class="add-btn">Agregar al carrito</button>
+        </div>
+
+        <!-- Producto 3 -->
+        <div class="product-card">
+            <span class="product-image">🎧</span>
+            <div class="product-name">Audífonos ANC Pro</div>
+            <div class="product-price">$249.000</div>
+            <button class="add-btn">Agregar al carrito</button>
+        </div>
+
+        <!-- Producto 4 -->
+        <div class="product-card">
+            <span class="product-image">⌚</span>
+            <div class="product-name">Smartwatch Sport</div>
+            <div class="product-price">$399.000</div>
+            <button class="add-btn">Agregar al carrito</button>
+        </div>
+    </div>
+
+</body>
+</html>
