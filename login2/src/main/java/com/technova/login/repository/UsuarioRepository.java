@@ -7,6 +7,24 @@ import java.util.Optional;
 
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
+    
+    /**
+     * Busca un usuario por su correo electrónico.
+     */
     Optional<Usuario> findByEmail(String email);
+    
+    /**
+     * Verifica si existe un usuario con el correo electrónico dado.
+     */
     boolean existsByEmail(String email);
+    
+    /**
+     * Verifica si existe un usuario por su ID.
+     */
+    boolean existsById(Long id);
+    
+    /**
+     * Elimina un usuario por su correo electrónico.
+     */
+    void deleteByEmail(String email);
 }
