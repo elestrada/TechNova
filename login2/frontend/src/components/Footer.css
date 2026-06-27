@@ -1,0 +1,171 @@
+/* src/components/Footer.css */
+.footer {
+    background-color: #131A22;
+    color: #D1D5DB;
+    width: 100%;
+    margin-top: 60px;
+    padding: 40px 20px 0;
+}
+
+.footer-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px;
+    padding-bottom: 32px;
+    border-bottom: 1px solid #1A2630;
+}
+
+/* ===== COLUMNAS ===== */
+.footer-section {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.footer-logo {
+    font-size: 28px;
+    font-weight: 700;
+    color: #FFFFFF;
+    margin: 0;
+}
+
+.footer-logo span {
+    color: #E07D00;
+}
+
+.footer-description {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #9CA3AF;
+    margin: 0;
+    max-width: 280px;
+}
+
+/* ===== SOCIAL ===== */
+.footer-social {
+    display: flex;
+    gap: 12px;
+    margin-top: 8px;
+}
+
+.social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: #1A2630;
+    border-radius: 50%;
+    color: #FFFFFF;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+.social-link svg {
+    width: 20px;
+    height: 20px;
+    stroke: #FFFFFF;
+    fill: none;
+    transition: stroke 0.3s;
+}
+
+.social-link:hover {
+    background: #1A2630;
+    transform: translateY(-2px);
+}
+
+.social-link:hover svg {
+    stroke: #E07D00;
+}
+
+/* ===== TÍTULOS ===== */
+.footer-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #FFFFFF;
+    margin: 0 0 4px 0;
+}
+
+/* ===== LISTAS DE ENLACES ===== */
+.footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.footer-links li a,
+.footer-links li span {
+    color: #9CA3AF;
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.2s;
+}
+
+.footer-links li a:hover {
+    color: #E07D00;
+}
+
+.footer-contact li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: #9CA3AF;
+}
+
+.footer-contact li a {
+    color: #9CA3AF;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.footer-contact li a:hover {
+    color: #E07D00;
+}
+
+/* ===== BARRA INFERIOR ===== */
+.footer-bottom {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 16px 0;
+    text-align: center;
+    font-size: 13px;
+    color: #6B7280;
+}
+
+.footer-bottom p {
+    margin: 0;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1024px) {
+    .footer-inner {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 32px;
+    }
+}
+
+@media (max-width: 768px) {
+    .footer {
+        padding: 30px 16px 0;
+    }
+
+    .footer-inner {
+        grid-template-columns: 1fr;
+        gap: 24px;
+        padding-bottom: 24px;
+    }
+
+    .footer-description {
+        max-width: 100%;
+    }
+
+    .footer-social {
+        justify-content: flex-start;
+    }
+}
